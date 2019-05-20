@@ -24,12 +24,11 @@ class LogInActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        Log.d("HEY", "I RESUMED!")
         val uri = intent.data
         if (uri != null && uri.toString().startsWith(redirectUri)) {
             val code = uri.getQueryParameter("code")
             val api = BgmOAuthService.create()
-            api.getAccessToken(clientId, clientSecret, code!!, redirectUri, "authorization_code")
+            val token = api.getAccessToken(clientId, clientSecret, code!!, redirectUri, "authorization_code")
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe({ result -> saveAccessToken(result)

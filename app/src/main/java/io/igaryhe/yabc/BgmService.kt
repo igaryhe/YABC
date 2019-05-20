@@ -8,6 +8,10 @@ import retrofit2.http.*
 
 interface BgmService {
 
+    @GET("/user/{user_id}/collection")
+    fun getUserCollection(@Path("user_id") userId: Int,
+                          @Query("cat") cat: String): Observable<List<CollectionSubject>>
+
     companion object Factory {
         fun create(): BgmService {
             return Retrofit.Builder()
