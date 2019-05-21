@@ -13,8 +13,14 @@
         <item name="colorPrimaryDark">@color/bgmPrimaryDark</item>
         <item name="android:colorSecondary">@color/bgmSecondary</item>
     </style>
-    
+
     <style name="BgmLightTheme.Launcher">
         <item name="android:windowBackground">@drawable/bgm_launcher_background</item>
     </style>
+    <style name="BgmLightTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="BgmLightTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="BgmLightTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 </resources>
