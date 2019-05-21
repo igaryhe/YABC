@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="BgmLightTheme" parent="Theme.AppCompat.Light">
+    <style name="BgmLightTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="colorPrimary">@color/bgmPrimary</item>
         <item name="colorPrimaryDark">@color/bgmPrimaryDark</item>
         <item name="android:colorSecondary">@color/bgmSecondary</item>
