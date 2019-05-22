@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.fragment_collection_subject.*
 
 class SubjectFragment : Fragment() {
 
-    private var subjects: List<CollectionSubject> = ArrayList()
+    private var subjects: MutableList<CollectionSubject> = ArrayList()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,7 +29,7 @@ class SubjectFragment : Fragment() {
     }
 
     fun setAdapter(subjects: List<CollectionSubject>) {
-        this.subjects = subjects
+        this.subjects.addAll(subjects)
         list.adapter!!.notifyDataSetChanged()
     }
 }

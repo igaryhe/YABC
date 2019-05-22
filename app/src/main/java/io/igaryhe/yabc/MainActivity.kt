@@ -4,12 +4,14 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import androidx.core.view.GravityCompat
 import androidx.appcompat.app.ActionBarDrawerToggle
 import android.view.MenuItem
 import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
+import androidx.viewpager.widget.ViewPager
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
@@ -34,16 +36,38 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         category_pager.adapter = CategoryPagerAdapter(supportFragmentManager)
         cat_tab.setupWithViewPager(category_pager)
 
+        swipe_refresh.setOnRefreshListener {
+            Handler().postDelayed({ swipe_refresh.isRefreshing = false },1000)
+        }
+
         val sp = getSharedPreferences("token", Context.MODE_PRIVATE)
         val userId = sp.getInt("user_id", 0)
         val api = BgmService.create()
-        api.getUserCollection(userId, "watching")
+        api.getUserCollection(userId, "watching_all")
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribe({result ->
-                val fragment = supportFragmentManager.findFragmentByTag("android:switcher:"
+                val anime = supportFragmentManager.findFragmentByTag("android:switcher:"
                         + R.id.category_pager + ":" + 0) as SubjectFragment
-                fragment.setAdapter(result)
+                /*
+                val book = supportFragmentManager.findFragmentByTag("android:switcher:"
+                        + R.id.category_pager + ":" + 1) as SubjectFragment
+                val drama = supportFragmentManager.findFragmentByTag("android:switcher:"
+                        + R.id.category_pager + ":" + 2) as SubjectFragment
+                 */
+                val animes: MutableList<CollectionSubject> = mutableListOf()
+                val books: MutableList<CollectionSubject> = mutableListOf()
+                val dramas: MutableList<CollectionSubject> = mutableListOf()
+                for (subject: CollectionSubject in result) {
+                    when (subject.subject.type) {
+                        1 -> books.add(subject)
+                        2 -> animes.add(subject)
+                        6 -> dramas.add(subject)
+                    }
+                }
+                anime.setAdapter(animes)
+                // book.setAdapter(books)
+                // drama.setAdapter(dramas)
             }, { error -> error.printStackTrace() })
     }
 
