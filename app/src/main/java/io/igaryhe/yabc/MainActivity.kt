@@ -14,14 +14,18 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.fragment_collection_subject.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     lateinit var appbarMenu: Menu
+    lateinit var mSubjectViewModel: SubjectViewModel
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,35 +47,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             Handler().postDelayed({ swipe_refresh.isRefreshing = false },1000)
         }
 
-        val sp = getSharedPreferences("token", Context.MODE_PRIVATE)
-        val userId = sp.getInt("user_id", 0)
-        val api = BgmService.create()
-        api.getUserCollection(userId, "watching_all")
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .subscribe({result ->
-                val anime = supportFragmentManager.findFragmentByTag("android:switcher:"
-                        + R.id.category_pager + ":" + 0) as SubjectFragment
-                /*
-                val book = supportFragmentManager.findFragmentByTag("android:switcher:"
-                        + R.id.category_pager + ":" + 1) as SubjectFragment
-                val drama = supportFragmentManager.findFragmentByTag("android:switcher:"
-                        + R.id.category_pager + ":" + 2) as SubjectFragment
-                 */
-                val animes: MutableList<CollectionSubject> = mutableListOf()
-                val books: MutableList<CollectionSubject> = mutableListOf()
-                val dramas: MutableList<CollectionSubject> = mutableListOf()
-                for (subject: CollectionSubject in result) {
-                    when (subject.subject.type) {
-                        1 -> books.add(subject)
-                        2 -> animes.add(subject)
-                        6 -> dramas.add(subject)
-                    }
-                }
-                anime.setAdapter(animes)
-                // book.setAdapter(books)
-                // drama.setAdapter(dramas)
-            }, { error -> error.printStackTrace() })
+        mSubjectViewModel = ViewModelProviders.of(this).get(SubjectViewModel::class.java)
+        mSubjectViewModel.subjects.observe(this,
+            Observer<List<CollectionSubject>> { t ->
+                val adapter = list.adapter!! as CollectionSubjectAdapter
+                adapter.setCollectionSubjects(t!!)
+            })
+        /*
+          val anime = supportFragmentManager.findFragmentByTag("android:switcher:"
+                      + R.id.category_pager + ":" + 0) as SubjectFragment
+          */
     }
 
     override fun onBackPressed() {

@@ -11,7 +11,9 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/BgmLightTheme">
+        android:theme="@style/BgmLightTheme"
+        android:allowBackup="true"
+        android:fullBackupContent="true">
         <activity android:name=".SearchResultActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -49,7 +51,5 @@
                     android:scheme="yabc" />
             </intent-filter>
         </activity>
-        <activity android:name=".DiscoverActivity" />
     </application>
-
 </manifest>
