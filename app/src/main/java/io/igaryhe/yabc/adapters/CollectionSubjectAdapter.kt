@@ -25,7 +25,7 @@ class CollectionSubjectAdapter:
         holder.apply {
             subjectName.text = mSubjects[position].subject.name
             subjectId.text = mSubjects[position].subject.id.toString()
-            Picasso.get().load(mSubjects[position].subject.images.medium).into(subjectCover)
+            Picasso.get().load(mSubjects[position].subject.images.large).resize(200, 284).into(subjectCover)
         }
     }
 
