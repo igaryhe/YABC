@@ -25,9 +25,9 @@ class CollectionFragment(private val type: Int) : Fragment() {
             t ->
             val mList = mutableListOf<CollectionSubject>()
             for (subject: CollectionSubject in t) {
-                if (subject.subjectSmall.type == type) mList.add(subject)
+                if (subject.subject.type == type) mList.add(subject)
             }
-            val adapter = list.adapter!! as CollectionSubjectAdapter
+            val adapter = cal_list.adapter!! as CollectionSubjectAdapter
             adapter.setCollectionSubjects(mList)
         })
         // Set the adapter

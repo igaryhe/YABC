@@ -5,6 +5,7 @@ import io.reactivex.Observable
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
+import io.reactivex.Flowable
 
 interface BgmService {
 
@@ -33,6 +34,9 @@ interface BgmService {
         @Field("redirect_uri") redirectUri: String,
         @Field("grant_type") grantType: String
     ): LiveData<RefreshToken>
+
+    @GET("/calendar")
+    fun getCalendar():LiveData<List<Calendar>>
 
     companion object Factory {
         fun create(): BgmService {

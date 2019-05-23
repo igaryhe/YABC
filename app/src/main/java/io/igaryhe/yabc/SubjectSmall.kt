@@ -10,6 +10,4 @@ data class SubjectSmall(val id: Int,
                         val summary: String,
                         @SerializedName("air_date") val airDate: String,
                         @SerializedName("air_weekday") val airWeekday: Int,
-                        val images: Images,
-                        val eps: Int,
-                        @SerializedName("eps_count") val epsCount: Int)
+                        val images: Images)

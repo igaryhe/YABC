@@ -6,6 +6,7 @@ import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.content.Intent
 import androidx.core.view.GravityCompat
 import androidx.appcompat.app.ActionBarDrawerToggle
 import android.view.MenuItem
@@ -78,14 +79,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 val search = appbarMenu.findItem(R.id.search)
                 search.expandActionView()
             }
-            R.id.nav_tools -> {
-
-            }
-            R.id.nav_share -> {
-
-            }
-            R.id.nav_send -> {
-
+            R.id.nav_calendar -> {
+                val intent = Intent(this,DiscoverActivity::class.java)
+                startActivity(intent)
             }
         }
         drawer_layout.closeDrawer(GravityCompat.START)
