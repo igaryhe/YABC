@@ -21,9 +21,9 @@ class CollectionSubjectAdapter(subjects: List<CollectionSubject>) :
     override fun getItemCount() = mSubjects.size
     override fun onBindViewHolder(holder: CollectionSubjectViewHolder, position: Int) {
         holder.apply {
-            subjectName.text = mSubjects[position].subject.name
-            subjectId.text = mSubjects[position].subject.id.toString()
-            Picasso.get().load(mSubjects[position].subject.images.medium).into(subjectCover)
+            subjectName.text = mSubjects[position].subjectSmall.name
+            subjectId.text = mSubjects[position].subjectSmall.id.toString()
+            Picasso.get().load(mSubjects[position].subjectSmall.images.medium).into(subjectCover)
         }
     }
 
