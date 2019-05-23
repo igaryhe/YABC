@@ -13,9 +13,14 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.squareup.picasso.Picasso
 import io.igaryhe.yabc.adapters.CategoryPagerAdapter
 import io.igaryhe.yabc.R
@@ -23,11 +28,10 @@ import io.igaryhe.yabc.databinding.ActivityMainBinding
 import io.igaryhe.yabc.databinding.NavHeaderMainBinding
 import io.igaryhe.yabc.viewModels.UserViewModel
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.nav_header_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-    lateinit var appbarMenu: Menu
+    private lateinit var appbarMenu: Menu
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,12 +50,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         nav_view.setNavigationItemSelectedListener(this)
 
-        category_pager.adapter = CategoryPagerAdapter(supportFragmentManager)
-        cat_tab.setupWithViewPager(category_pager)
-
-        swipe_refresh.setOnRefreshListener {
-            Handler().postDelayed({ swipe_refresh.isRefreshing = false },1000)
-        }
         val mBind: NavHeaderMainBinding = DataBindingUtil.inflate(
             layoutInflater, R.layout.nav_header_main, binding.navView, false)
         val mUserViewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
@@ -62,7 +60,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 t ->
             Picasso.get().load(t).resize(192, 192).into(avatar)
         })
+        val navController = findNavController(R.id.nav_host_fragment)
+        val appBarConfiguration = AppBarConfiguration(navController.graph, drawer_layout)
+        nav_view.setupWithNavController(navController)
     }
+
+    override fun onSupportNavigateUp()
+            = findNavController(R.id.nav_host_fragment).navigateUp()
 
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
@@ -84,28 +88,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 override fun onQueryTextChange(newText: String?): Boolean { return true }
             })
         }
-
         return true
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle nav_graph view item clicks here.
-        when (item.itemId) {
-            R.id.nav_home -> {
-                // Handle the camera action
-            }
-            R.id.nav_gallery -> {
-
-            }
-            R.id.nav_discover -> {
-                val search = appbarMenu.findItem(R.id.search)
-                search.expandActionView()
-            }
-            R.id.nav_calendar -> {
-                val intent = Intent(this, DiscoverActivity::class.java)
-                startActivity(intent)
-            }
-        }
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
