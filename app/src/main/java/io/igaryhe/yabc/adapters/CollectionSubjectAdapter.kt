@@ -1,10 +1,12 @@
-package io.igaryhe.yabc
+package io.igaryhe.yabc.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import io.igaryhe.yabc.entities.CollectionSubject
+import io.igaryhe.yabc.R
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.subject_card.*
 

@@ -1,4 +1,4 @@
-package io.igaryhe.yabc
+package io.igaryhe.yabc.entities
 
 import com.google.gson.annotations.SerializedName
 
@@ -10,4 +10,5 @@ data class SubjectSmall(val id: Int,
                         val summary: String,
                         @SerializedName("air_date") val airDate: String,
                         @SerializedName("air_weekday") val airWeekday: Int,
-                        val images: Images)
+                        val images: Images
+)

@@ -1,4 +1,4 @@
-package io.igaryhe.yabc
+package io.igaryhe.yabc.entities
 
 data class Weekday (val cn: String,
                    val en: String,

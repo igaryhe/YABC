@@ -1,4 +1,4 @@
-package io.igaryhe.yabc
+package io.igaryhe.yabc.fragments
 
 
 import android.os.Bundle
@@ -10,6 +10,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import io.igaryhe.yabc.viewModels.CalendarViewModel
+import io.igaryhe.yabc.R
+import io.igaryhe.yabc.adapters.CalendarSubjectAdapter
+import io.igaryhe.yabc.entities.Calendar
+import io.igaryhe.yabc.entities.SubjectSmall
 import kotlinx.android.synthetic.main.fragment_calendar.*
 
 class CalendarFragment(private val day: Int) : Fragment() {

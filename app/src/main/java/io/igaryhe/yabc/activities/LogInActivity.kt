@@ -1,4 +1,4 @@
-package io.igaryhe.yabc
+package io.igaryhe.yabc.activities
 
 import android.content.Context
 import android.content.Intent
@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import io.igaryhe.yabc.entities.AccessToken
+import io.igaryhe.yabc.api.BgmService
+import io.igaryhe.yabc.R
 
 class LogInActivity : AppCompatActivity() {
 

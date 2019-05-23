@@ -1,4 +1,4 @@
-package io.igaryhe.yabc
+package io.igaryhe.yabc.util
 
 import android.content.Context
 import android.util.AttributeSet

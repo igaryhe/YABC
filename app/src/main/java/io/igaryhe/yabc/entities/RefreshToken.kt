@@ -1,4 +1,4 @@
-package io.igaryhe.yabc
+package io.igaryhe.yabc.entities
 
 import com.google.gson.annotations.SerializedName
 

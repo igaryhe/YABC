@@ -1,9 +1,11 @@
-package io.igaryhe.yabc
+package io.igaryhe.yabc.activities
 
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
+import io.igaryhe.yabc.adapters.CalendarPagerAdapter
+import io.igaryhe.yabc.R
 import kotlinx.android.synthetic.main.activity_discover.*
 import kotlinx.android.synthetic.main.activity_discover.swipe_refresh
 

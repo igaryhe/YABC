@@ -1,10 +1,11 @@
-package io.igaryhe.yabc
+package io.igaryhe.yabc.activities
 
 import android.app.SearchManager
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import io.igaryhe.yabc.R
 import kotlinx.android.synthetic.main.activity_search_result.*
 
 class SearchResultActivity : AppCompatActivity() {

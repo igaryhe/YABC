@@ -1,11 +1,10 @@
-package io.igaryhe.yabc
+package io.igaryhe.yabc.activities
 
 import android.annotation.SuppressLint
 import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.content.Intent
 import androidx.core.view.GravityCompat
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -14,6 +13,8 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import androidx.appcompat.widget.SearchView
+import io.igaryhe.yabc.adapters.CategoryPagerAdapter
+import io.igaryhe.yabc.R
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -27,7 +28,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setSupportActionBar(toolbar)
 
         val toggle = ActionBarDrawerToggle(
-            this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+            this, drawer_layout, toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
         )
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
@@ -80,7 +83,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 search.expandActionView()
             }
             R.id.nav_calendar -> {
-                val intent = Intent(this,DiscoverActivity::class.java)
+                val intent = Intent(this, DiscoverActivity::class.java)
                 startActivity(intent)
             }
         }

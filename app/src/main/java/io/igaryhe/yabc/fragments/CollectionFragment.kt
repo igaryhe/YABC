@@ -1,4 +1,4 @@
-package io.igaryhe.yabc
+package io.igaryhe.yabc.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,6 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import io.igaryhe.yabc.entities.CollectionSubject
+import io.igaryhe.yabc.R
+import io.igaryhe.yabc.viewModels.SubjectViewModel
+import io.igaryhe.yabc.adapters.CollectionSubjectAdapter
 import kotlinx.android.synthetic.main.fragment_collection.*
 
 class CollectionFragment(private val type: Int) : Fragment() {

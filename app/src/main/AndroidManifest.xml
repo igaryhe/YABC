@@ -14,7 +14,7 @@
         android:theme="@style/BgmLightTheme"
         android:allowBackup="true"
         android:fullBackupContent="true">
-        <activity android:name=".SearchResultActivity">
+        <activity android:name=".activities.SearchResultActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -23,7 +23,7 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/BgmLightTheme.NoActionBar">
             <meta-data
@@ -31,7 +31,7 @@
                 android:value=".SearchResultActivity" />
         </activity>
         <activity
-            android:name=".SplashActivity"
+            android:name=".activities.SplashActivity"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,7 +39,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LogInActivity">
+        <activity android:name=".activities.LogInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -51,6 +51,6 @@
                     android:scheme="yabc" />
             </intent-filter>
         </activity>
-        <activity android:name=".DiscoverActivity"></activity>
+        <activity android:name=".activities.DiscoverActivity"/>
     </application>
 </manifest>

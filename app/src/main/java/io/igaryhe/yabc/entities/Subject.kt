@@ -1,4 +1,4 @@
-package io.igaryhe.yabc
+package io.igaryhe.yabc.entities
 
 data class Subject(val id: Int,
               val url: String,

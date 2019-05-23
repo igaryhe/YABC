@@ -1,4 +1,4 @@
-package io.igaryhe.yabc
+package io.igaryhe.yabc.util
 
 import androidx.lifecycle.LiveData
 import retrofit2.*

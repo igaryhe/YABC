@@ -1,8 +1,9 @@
-package io.igaryhe.yabc
+package io.igaryhe.yabc.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import io.igaryhe.yabc.fragments.CalendarFragment
 
 class CalendarPagerAdapter(fm: FragmentManager)
     : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {

@@ -1,11 +1,14 @@
-package io.igaryhe.yabc
+package io.igaryhe.yabc.api
 
 import androidx.lifecycle.LiveData
-import io.reactivex.Observable
+import io.igaryhe.yabc.entities.CollectionSubject
+import io.igaryhe.yabc.util.LiveDataCallAdapterFactory
+import io.igaryhe.yabc.entities.AccessToken
+import io.igaryhe.yabc.entities.Calendar
+import io.igaryhe.yabc.entities.RefreshToken
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
-import io.reactivex.Flowable
 
 interface BgmService {
 
