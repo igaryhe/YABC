@@ -6,8 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log.d
 import androidx.lifecycle.Observer
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 
 class SplashActivity : AppCompatActivity() {
 
@@ -25,9 +23,9 @@ class SplashActivity : AppCompatActivity() {
             else -> {
                 val api = BgmService.create()
                 api.refreshToken(clientId, clientSecret,
-                    refreshToken!!, redirectUri, "refresh_token").observe(this, Observer<RefreshToken> {
-                    t -> saveRefreshToken(t)
-                })
+                    refreshToken!!, redirectUri, "refresh_token")
+                    .observe(this, Observer<RefreshToken> {
+                    t -> saveRefreshToken(t) })
                 startActivity(Intent(this, MainActivity::class.java))
             }
         }

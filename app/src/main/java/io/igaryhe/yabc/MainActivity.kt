@@ -13,16 +13,12 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import androidx.appcompat.widget.SearchView
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.fragment_collection_subject.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     lateinit var appbarMenu: Menu
-    lateinit var mSubjectViewModel: SubjectViewModel
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,17 +39,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         swipe_refresh.setOnRefreshListener {
             Handler().postDelayed({ swipe_refresh.isRefreshing = false },1000)
         }
-
-        mSubjectViewModel = ViewModelProviders.of(this).get(SubjectViewModel::class.java)
-        mSubjectViewModel.subjects.observe(this,
-            Observer<List<CollectionSubject>> { t ->
-                val adapter = list.adapter!! as CollectionSubjectAdapter
-                adapter.setCollectionSubjects(t!!)
-            })
-        /*
-          val anime = supportFragmentManager.findFragmentByTag("android:switcher:"
-                      + R.id.category_pager + ":" + 0) as SubjectFragment
-          */
     }
 
     override fun onBackPressed() {
