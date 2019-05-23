@@ -1,11 +1,8 @@
 package io.igaryhe.yabc.api
 
 import androidx.lifecycle.LiveData
-import io.igaryhe.yabc.entities.CollectionSubject
+import io.igaryhe.yabc.entities.*
 import io.igaryhe.yabc.util.LiveDataCallAdapterFactory
-import io.igaryhe.yabc.entities.AccessToken
-import io.igaryhe.yabc.entities.Calendar
-import io.igaryhe.yabc.entities.RefreshToken
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
@@ -40,6 +37,9 @@ interface BgmService {
 
     @GET("/calendar")
     fun getCalendar():LiveData<List<Calendar>>
+
+    @GET("/user/{user_id}")
+    fun getUser(@Path("user_id") userId: Int): LiveData<User>
 
     companion object Factory {
         fun create(): BgmService {

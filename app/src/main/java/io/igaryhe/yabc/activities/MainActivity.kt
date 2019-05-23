@@ -13,18 +13,27 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import androidx.appcompat.widget.SearchView
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import com.squareup.picasso.Picasso
 import io.igaryhe.yabc.adapters.CategoryPagerAdapter
 import io.igaryhe.yabc.R
+import io.igaryhe.yabc.databinding.ActivityMainBinding
+import io.igaryhe.yabc.databinding.NavHeaderMainBinding
+import io.igaryhe.yabc.viewModels.UserViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.nav_header_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-
     lateinit var appbarMenu: Menu
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        // setContentView(R.layout.activity_main)
+        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+
         setSupportActionBar(toolbar)
 
         val toggle = ActionBarDrawerToggle(
@@ -43,6 +52,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         swipe_refresh.setOnRefreshListener {
             Handler().postDelayed({ swipe_refresh.isRefreshing = false },1000)
         }
+        val mBind: NavHeaderMainBinding = DataBindingUtil.inflate(
+            layoutInflater, R.layout.nav_header_main, binding.navView, false)
+        val mUserViewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
+        mBind.userViewModel = mUserViewModel
+        mBind.lifecycleOwner = this
+        binding.navView.addHeaderView(mBind.root)
+        mUserViewModel.avatar.observe(this, Observer<String> {
+                t ->
+            Picasso.get().load(t).resize(192, 192).into(avatar)
+        })
     }
 
     override fun onBackPressed() {
@@ -70,7 +89,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle navigation view item clicks here.
+        // Handle nav_graph view item clicks here.
         when (item.itemId) {
             R.id.nav_home -> {
                 // Handle the camera action
