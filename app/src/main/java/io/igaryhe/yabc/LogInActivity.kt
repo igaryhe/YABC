@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -26,15 +27,15 @@ class LogInActivity : AppCompatActivity() {
         val uri = intent.data
         if (uri != null && uri.toString().startsWith(redirectUri)) {
             val code = uri.getQueryParameter("code")
-            val api = BgmOAuthService.create()
-            val token = api.getAccessToken(clientId, clientSecret, code!!, redirectUri, "authorization_code")
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe({ result -> saveAccessToken(result)
-                    Toast.makeText(this, result.accessToken, Toast.LENGTH_LONG).show()
+            val api = BgmService.create()
+            api.getAccessToken(clientId, clientSecret,
+                code!!, redirectUri, "authorization_code")
+                .observe(this, Observer<AccessToken> {
+                    t ->
+                    saveAccessToken(t)
                     startActivity(Intent(this, MainActivity::class.java))
-                    finish()},
-                    { error -> error.printStackTrace() })
+                    finish()
+                })
         }
     }
 
