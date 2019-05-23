@@ -10,10 +10,10 @@ import io.igaryhe.yabc.R
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.subject_card.*
 
-class CollectionSubjectAdapter(subjects: List<CollectionSubject>) :
+class CollectionSubjectAdapter:
     RecyclerView.Adapter<CollectionSubjectAdapter.CollectionSubjectViewHolder>() {
 
-    private var mSubjects = subjects
+    private var mSubjects = listOf<CollectionSubject>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
             CollectionSubjectViewHolder {

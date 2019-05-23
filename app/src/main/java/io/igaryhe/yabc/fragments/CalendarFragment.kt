@@ -18,7 +18,6 @@ import io.igaryhe.yabc.entities.SubjectSmall
 import kotlinx.android.synthetic.main.fragment_calendar.*
 
 class CalendarFragment(private val day: Int) : Fragment() {
-    private var subjects: MutableList<SubjectSmall> = ArrayList()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,15 +25,15 @@ class CalendarFragment(private val day: Int) : Fragment() {
         val view = inflater.inflate(R.layout.fragment_calendar, container, false)
 
         val mCalendarViewModel = ViewModelProviders.of(this).get(CalendarViewModel::class.java)
-        mCalendarViewModel.calendar.observe(this, Observer<List<Calendar>> {
+        mCalendarViewModel.calendar[day].observe(this, Observer<List<SubjectSmall>> {
             t ->
             val adapter = cal_list.adapter!! as CalendarSubjectAdapter
-            adapter.setCalendarSubjects(t[day].items)
+            adapter.setCalendarSubjects(t)
         })
         if (view is RecyclerView) {
             with(view) {
                 layoutManager = LinearLayoutManager(context)
-                adapter = CalendarSubjectAdapter(subjects)
+                adapter = CalendarSubjectAdapter()
             }
         }
         return view

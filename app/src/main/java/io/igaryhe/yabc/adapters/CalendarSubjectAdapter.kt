@@ -10,9 +10,9 @@ import io.igaryhe.yabc.entities.SubjectSmall
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.subject_card.*
 
-class CalendarSubjectAdapter(subjects: List<SubjectSmall>) :
+class CalendarSubjectAdapter:
     RecyclerView.Adapter<CalendarSubjectAdapter.CalendarSubjectViewHolder>() {
-    private var mSubjects = subjects
+    private var mSubjects = mutableListOf<SubjectSmall>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarSubjectViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.subject_card, parent, false)
         return CalendarSubjectViewHolder(v)
@@ -24,14 +24,13 @@ class CalendarSubjectAdapter(subjects: List<SubjectSmall>) :
         holder.apply {
             subjectName.text = mSubjects[position].name
             subjectId.text = mSubjects[position].id.toString()
-            // Log.d("dDEBUG", mSubjects[position].images.grid + " " + position)
             if (mSubjects[position].images != null)
                 Picasso.get().load(mSubjects[position].images.medium).into(subjectCover)
         }
     }
 
     fun setCalendarSubjects(subjects: List<SubjectSmall>) {
-        mSubjects = subjects
+        mSubjects = subjects as MutableList<SubjectSmall>
         notifyDataSetChanged()
     }
 
