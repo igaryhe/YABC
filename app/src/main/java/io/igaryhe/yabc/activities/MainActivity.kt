@@ -19,8 +19,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.ui.*
 import com.squareup.picasso.Picasso
 import io.igaryhe.yabc.adapters.CategoryPagerAdapter
 import io.igaryhe.yabc.R
@@ -30,26 +29,15 @@ import io.igaryhe.yabc.viewModels.UserViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.nav_header_main.*
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity() {
     private lateinit var appbarMenu: Menu
+    private lateinit var appBarConfiguration: AppBarConfiguration
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // setContentView(R.layout.activity_main)
         val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
         setSupportActionBar(toolbar)
-
-        val toggle = ActionBarDrawerToggle(
-            this, drawer_layout, toolbar,
-            R.string.navigation_drawer_open,
-            R.string.navigation_drawer_close
-        )
-        drawer_layout.addDrawerListener(toggle)
-        toggle.syncState()
-
-        nav_view.setNavigationItemSelectedListener(this)
-
+        // Display user info
         val mBind: NavHeaderMainBinding = DataBindingUtil.inflate(
             layoutInflater, R.layout.nav_header_main, binding.navView, false)
         val mUserViewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
@@ -60,21 +48,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 t ->
             Picasso.get().load(t).resize(192, 192).into(avatar)
         })
+        // Setup nav controller
         val navController = findNavController(R.id.nav_host_fragment)
-        val appBarConfiguration = AppBarConfiguration(navController.graph, drawer_layout)
+        appBarConfiguration = AppBarConfiguration(setOf(R.id.mainFragment, R.id.discoverFragment), drawer_layout)
         nav_view.setupWithNavController(navController)
+        setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
     override fun onSupportNavigateUp()
-            = findNavController(R.id.nav_host_fragment).navigateUp()
-
-    override fun onBackPressed() {
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
-        }
-    }
+            = findNavController(R.id.nav_host_fragment).navigateUp(appBarConfiguration)
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
 
@@ -88,11 +70,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 override fun onQueryTextChange(newText: String?): Boolean { return true }
             })
         }
-        return true
-    }
-
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
 }

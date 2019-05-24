@@ -7,11 +7,29 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="io.igaryhe.yabc.fragments.MainFragment"
-        android:label="fragment_main"
-        tools:layout="@layout/fragment_main"/>
+        android:label="Collection"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_main_to_subject"
+            app:destination="@id/subjectFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_left"
+            app:popUpTo="@+id/mainFragment" />
+    </fragment>
     <fragment
         android:id="@+id/discoverFragment"
         android:name="io.igaryhe.yabc.fragments.DiscoverFragment"
-        android:label="fragment_discover"
-        tools:layout="@layout/fragment_discover" />
+        android:label="Calendar"
+        tools:layout="@layout/fragment_discover"/>
+    <fragment
+        android:id="@+id/subjectFragment"
+        android:name="io.igaryhe.yabc.SubjectFragment"
+        android:label="Subject"
+        tools:layout="@layout/fragment_subject">
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="yabc://subject/{id}" />
+    </fragment>
 </navigation>
