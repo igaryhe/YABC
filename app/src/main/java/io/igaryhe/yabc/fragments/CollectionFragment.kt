@@ -1,23 +1,17 @@
 package io.igaryhe.yabc.fragments
 
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.NavController
-import androidx.navigation.fragment.findNavController
 import io.igaryhe.yabc.entities.CollectionSubject
 import io.igaryhe.yabc.R
-import io.igaryhe.yabc.adapters.CalendarSubjectAdapter
-import io.igaryhe.yabc.viewModels.SubjectViewModel
+import io.igaryhe.yabc.viewModels.CollectionViewModel
 import io.igaryhe.yabc.adapters.CollectionSubjectAdapter
 import kotlinx.android.synthetic.main.fragment_collection.*
 
@@ -31,7 +25,7 @@ class CollectionFragment(private val type: Int) : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_collection, container, false)
         // Livedata
-        val mSubjectViewModel = ViewModelProviders.of(this).get(SubjectViewModel::class.java)
+        val mSubjectViewModel = ViewModelProviders.of(this).get(CollectionViewModel::class.java)
         mSubjectViewModel.subjects.observe(this, Observer<List<CollectionSubject>> {
             t ->
             val mList = mutableListOf<CollectionSubject>()
