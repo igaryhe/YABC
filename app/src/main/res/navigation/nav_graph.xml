@@ -25,11 +25,12 @@
         tools:layout="@layout/fragment_discover"/>
     <fragment
         android:id="@+id/subjectFragment"
-        android:name="io.igaryhe.yabc.SubjectFragment"
+        android:name="io.igaryhe.yabc.fragments.SubjectFragment"
         android:label="Subject"
         tools:layout="@layout/fragment_subject">
-        <deepLink
-            android:id="@+id/deepLink"
-            app:uri="yabc://subject/{id}" />
+        <argument
+            android:name="url"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
 </navigation>

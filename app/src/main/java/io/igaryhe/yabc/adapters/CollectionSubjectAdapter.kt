@@ -1,16 +1,14 @@
 package io.igaryhe.yabc.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
-import androidx.navigation.Navigation.findNavController
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import io.igaryhe.yabc.entities.CollectionSubject
 import io.igaryhe.yabc.R
+import io.igaryhe.yabc.fragments.MainFragmentDirections
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.subject_card.*
 
@@ -30,7 +28,11 @@ class CollectionSubjectAdapter:
             subjectName.text = mSubjects[position].subject.name
             subjectId.text = mSubjects[position].subject.id.toString()
             Picasso.get().load(mSubjects[position].subject.images.large).resize(200, 284).into(subjectCover)
-            collectionSubject.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.subjectFragment, null))
+            collectionSubject.setOnClickListener { v ->
+                val url = mSubjects[position].subjectId
+                val action = MainFragmentDirections.actionMainToSubject(url)
+                v.findNavController().navigate(action)
+            }
         }
     }
 
@@ -38,7 +40,6 @@ class CollectionSubjectAdapter:
         mSubjects = subjects
         notifyDataSetChanged()
     }
-
 
     inner class CollectionSubjectViewHolder(override val containerView: View)
         : RecyclerView.ViewHolder(containerView), LayoutContainer

@@ -14,14 +14,6 @@
         android:theme="@style/BgmLightTheme"
         android:allowBackup="true"
         android:fullBackupContent="true">
-        <activity android:name=".activities.SearchResultActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
-        </activity>
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/title_activity_main"
