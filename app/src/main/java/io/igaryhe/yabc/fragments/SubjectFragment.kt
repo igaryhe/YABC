@@ -19,6 +19,7 @@ class SubjectFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //imageView.imageAlpha = args.images.medium
         text.text = args.url.toString()
     }
 }
