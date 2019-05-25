@@ -12,10 +12,6 @@
         <action
             android:id="@+id/action_main_to_subject"
             app:destination="@id/subjectFragment"
-            app:enterAnim="@anim/slide_in_left"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_left"
             app:popUpTo="@+id/mainFragment" />
     </fragment>
     <fragment
@@ -29,8 +25,12 @@
         android:label="Subject"
         tools:layout="@layout/fragment_subject">
         <argument
-            android:name="url"
+            android:name="id"
             app:argType="integer"
             android:defaultValue="0" />
+        <argument
+            android:name="image"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
 </navigation>

@@ -16,26 +16,11 @@ import io.igaryhe.yabc.adapters.CollectionSubjectAdapter
 import kotlinx.android.synthetic.main.fragment_collection.*
 
 class CollectionFragment(private val type: Int) : Fragment() {
-    interface onItemClickListener {
-        fun onItemClick(position: Int)
-    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_collection, container, false)
-        // Livedata
-        val mSubjectViewModel = ViewModelProviders.of(this).get(CollectionViewModel::class.java)
-        mSubjectViewModel.subjects.observe(this, Observer<List<CollectionSubject>> {
-            t ->
-            val mList = mutableListOf<CollectionSubject>()
-            for (subject: CollectionSubject in t) {
-                if (subject.subject.type == type) mList.add(subject)
-            }
-            val adapter = col_list.adapter!! as CollectionSubjectAdapter
-            adapter.setCollectionSubjects(mList)
-        })
-        // Set the adapter
         if (view is RecyclerView) {
             with(view) {
                 layoutManager = LinearLayoutManager(context)
@@ -43,5 +28,19 @@ class CollectionFragment(private val type: Int) : Fragment() {
             }
         }
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val mSubjectViewModel = ViewModelProviders.of(this).get(CollectionViewModel::class.java)
+        mSubjectViewModel.subjects.observe(this, Observer<List<CollectionSubject>> {
+                t ->
+            val mList = mutableListOf<CollectionSubject>()
+            for (subject: CollectionSubject in t) {
+                if (subject.subject.type == type) mList.add(subject)
+            }
+            val adapter = col_list.adapter!! as CollectionSubjectAdapter
+            adapter.setCollectionSubjects(mList)
+        })
     }
 }

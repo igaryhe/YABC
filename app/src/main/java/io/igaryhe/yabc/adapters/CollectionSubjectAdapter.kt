@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import io.igaryhe.yabc.entities.CollectionSubject
@@ -26,11 +27,13 @@ class CollectionSubjectAdapter:
     override fun onBindViewHolder(holder: CollectionSubjectViewHolder, position: Int) {
         holder.apply {
             subjectName.text = mSubjects[position].subject.name
-            subjectId.text = mSubjects[position].subject.id.toString()
-            Picasso.get().load(mSubjects[position].subject.images.large).resize(200, 284).into(subjectCover)
+            val id = mSubjects[position].subject.id
+            val image = mSubjects[position].subject.images.large
+            subjectId.text = id.toString()
+            Picasso.get().load(image).resize(200, 284).into(subjectCover)
             collectionSubject.setOnClickListener { v ->
-                val url = mSubjects[position].subjectId
-                val action = MainFragmentDirections.actionMainToSubject(url)
+                val action = MainFragmentDirections.actionMainToSubject(id, image)
+                // val extra = FragmentNavigatorExtras(subjectCover to "cover")
                 v.findNavController().navigate(action)
             }
         }
