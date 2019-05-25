@@ -1,8 +1,9 @@
 package io.igaryhe.yabc.repositories
 
+import androidx.lifecycle.LiveData
 import io.igaryhe.yabc.api.BgmService
-import android.app.Application
+import io.igaryhe.yabc.entities.SubjectMedium
 
-class SubjectRepo (app:Application){
-    val subjectMedium = BgmService.create().getMediumSubject(123456)
+class SubjectRepo (id: Int){
+    val subjectMedium : LiveData<SubjectMedium> = BgmService.create().getMediumSubject(id)
 }

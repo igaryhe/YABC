@@ -38,10 +38,10 @@ interface BgmService {
     @GET("/calendar")
     fun getCalendar():LiveData<List<Calendar>>
 
-    @GET("/subject/{id}/responseGroup=Medium")
+    @GET("/subject/{id}?responseGroup=Medium")
     fun getMediumSubject(
-        @Field("id") id: Int
-    ):SubjectMedium
+        @Path("id") id: Int
+    ):LiveData<SubjectMedium>
 
     @GET("/user/{user_id}")
     fun getUser(@Path("user_id") userId: Int): LiveData<User>
