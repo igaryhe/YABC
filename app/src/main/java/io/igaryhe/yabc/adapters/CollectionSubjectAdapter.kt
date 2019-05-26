@@ -26,16 +26,18 @@ class CollectionSubjectAdapter:
     override fun getItemCount() = mSubjects.size
     override fun onBindViewHolder(holder: CollectionSubjectViewHolder, position: Int) {
         holder.apply {
-            subjectName.text = mSubjects[position].subject.name
-            val id = mSubjects[position].subject.id
-            val image = mSubjects[position].subject.images.large
-            subjectId.text = id.toString()
-            subjectCover.transitionName = "$id"
-            Picasso.get().load(image).resize(200, 284).into(subjectCover)
-            collectionSubject.setOnClickListener { v ->
-                val action = MainFragmentDirections.actionMainToSubject(id, image)
-                val extra = FragmentNavigatorExtras(subjectCover to "$id")
-                v.findNavController().navigate(action, extra)
+            with (mSubjects[position].subject) {
+                subjectName.text = name
+                val id = id
+                val image = images.large
+                subjectId.text = id.toString()
+                subjectCover.transitionName = "$id"
+                Picasso.get().load(image).resize(200, 284).into(subjectCover)
+                collectionSubject.setOnClickListener { v ->
+                    val action = MainFragmentDirections.actionMainToSubject(id, image)
+                    val extra = FragmentNavigatorExtras(subjectCover to "$id")
+                    v.findNavController().navigate(action, extra)
+                }
             }
         }
     }

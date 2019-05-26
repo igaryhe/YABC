@@ -11,11 +11,16 @@ import io.igaryhe.yabc.adapters.CategoryPagerAdapter
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment() {
-
+    private var v: View? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_main, container, false)
+    ): View? {
+        if (v == null) {
+            v = inflater.inflate(R.layout.fragment_main, container, false)
+        }
+        return v
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

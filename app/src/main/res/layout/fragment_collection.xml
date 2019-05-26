@@ -1,22 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.recyclerview.widget.RecyclerView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-        <variable
-            name="collectionViewModel"
-            type="io.igaryhe.yabc.viewModels.CollectionViewModel" />
-    </data>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/col_list"
-        android:name="io.igaryhe.yabc.CollectionFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        app:adapter="@{collectionViewModel.subjects}"
-        tools:listitem="@layout/subject_card"
-        app:layoutManager="LinearLayoutManager" />
-</layout>
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/col_list"
+    android:name="io.igaryhe.yabc.CollectionFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    tools:listitem="@layout/subject_card"
+    app:layoutManager="LinearLayoutManager" />

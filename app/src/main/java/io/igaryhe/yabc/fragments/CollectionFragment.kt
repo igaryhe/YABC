@@ -20,6 +20,7 @@ import io.igaryhe.yabc.databinding.FragmentCollectionBinding
 
 class CollectionFragment(private val type: Int) : Fragment() {
     // private lateinit var binding: FragmentCollectionBinding
+    private var v: View? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
