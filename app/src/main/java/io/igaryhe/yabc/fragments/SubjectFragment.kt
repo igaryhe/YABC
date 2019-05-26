@@ -10,12 +10,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
 import androidx.transition.TransitionInflater
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import io.igaryhe.yabc.R
 import io.igaryhe.yabc.entities.SubjectMedium
 import io.igaryhe.yabc.viewModels.SubjectMediumViewModel
-import io.igaryhe.yabc.viewModels.SubjectViewModelFactory
+import io.igaryhe.yabc.util.SubjectViewModelFactory
 import kotlinx.android.synthetic.main.fragment_subject.*
+import java.lang.Exception
 
 
 class SubjectFragment : Fragment() {
@@ -32,7 +34,15 @@ class SubjectFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val id = args.id
-        Picasso.get().load(args.image).into(imageView)
+        Picasso.get().load(args.image).into(imageView, object: Callback {
+            override fun onSuccess() {
+                startPostponedEnterTransition()
+            }
+
+            override fun onError(e: Exception?) {
+                startPostponedEnterTransition()
+            }
+        })
         val mSubjectMediumViewModel = ViewModelProviders
             .of(this, SubjectViewModelFactory(id))
             .get(SubjectMediumViewModel::class.java)

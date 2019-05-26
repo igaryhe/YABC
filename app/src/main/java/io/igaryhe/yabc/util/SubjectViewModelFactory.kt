@@ -1,7 +1,8 @@
-package io.igaryhe.yabc.viewModels
+package io.igaryhe.yabc.util
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import io.igaryhe.yabc.viewModels.SubjectMediumViewModel
 
 class SubjectViewModelFactory (private val id: Int):
     ViewModelProvider.NewInstanceFactory() {

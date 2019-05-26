@@ -33,8 +33,8 @@ class CollectionSubjectAdapter:
             Picasso.get().load(image).resize(200, 284).into(subjectCover)
             collectionSubject.setOnClickListener { v ->
                 val action = MainFragmentDirections.actionMainToSubject(id, image)
-                // val extra = FragmentNavigatorExtras(subjectCover to "cover")
-                v.findNavController().navigate(action)
+                val extra = FragmentNavigatorExtras(subjectCover to "cover")
+                v.findNavController().navigate(action, extra)
             }
         }
     }

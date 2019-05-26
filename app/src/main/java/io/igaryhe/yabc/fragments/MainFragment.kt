@@ -19,6 +19,7 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // category_pager.offscreenPageLimit = 3
         category_pager.adapter = CategoryPagerAdapter(activity!!.supportFragmentManager)
         cat_tab.setupWithViewPager(category_pager)
 
