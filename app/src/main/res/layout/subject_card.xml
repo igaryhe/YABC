@@ -22,7 +22,6 @@
 
             <ImageView
                 android:id="@+id/subjectCover"
-                android:transitionName="cover"
                 android:layout_width="100dp"
                 android:layout_height="150dp"
                 android:layout_marginStart="8dp"

@@ -30,10 +30,11 @@ class CollectionSubjectAdapter:
             val id = mSubjects[position].subject.id
             val image = mSubjects[position].subject.images.large
             subjectId.text = id.toString()
+            subjectCover.transitionName = "$id"
             Picasso.get().load(image).resize(200, 284).into(subjectCover)
             collectionSubject.setOnClickListener { v ->
                 val action = MainFragmentDirections.actionMainToSubject(id, image)
-                val extra = FragmentNavigatorExtras(subjectCover to "cover")
+                val extra = FragmentNavigatorExtras(subjectCover to "$id")
                 v.findNavController().navigate(action, extra)
             }
         }

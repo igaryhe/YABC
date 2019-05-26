@@ -34,11 +34,12 @@ class SubjectFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val id = args.id
+        imageView.transitionName = "$id"
+        postponeEnterTransition()
         Picasso.get().load(args.image).into(imageView, object: Callback {
             override fun onSuccess() {
                 startPostponedEnterTransition()
             }
-
             override fun onError(e: Exception?) {
                 startPostponedEnterTransition()
             }

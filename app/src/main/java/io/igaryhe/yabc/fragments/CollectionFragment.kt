@@ -19,11 +19,13 @@ import kotlinx.android.synthetic.main.fragment_collection.*
 import io.igaryhe.yabc.databinding.FragmentCollectionBinding
 
 class CollectionFragment(private val type: Int) : Fragment() {
+    // private lateinit var binding: FragmentCollectionBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // val binding = DataBindingUtil.inflate<FragmentCollectionBinding>(inflater, R.layout.fragment_collection, container, false)
+        // binding = DataBindingUtil.inflate<FragmentCollectionBinding>(inflater, R.layout.fragment_collection, container, false)
+        // val view = binding.root
         val view = inflater.inflate(R.layout.fragment_collection, container, false)
         if (view is RecyclerView) {
             with(view) {
@@ -31,23 +33,18 @@ class CollectionFragment(private val type: Int) : Fragment() {
                 adapter = CollectionSubjectAdapter()
             }
         }
-        /*
-        val mCollectionViewModel = ViewModelProviders
-            .of(this, CollectionViewModelFactory(activity!!.application, type))
-            .get(CollectionViewModel::class.java)
-        binding.collectionViewModel = mCollectionViewModel
-        binding.lifecycleOwner = this
-        */
+        // binding.lifecycleOwner = this
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = col_list.adapter!! as CollectionSubjectAdapter
-        val mSubjectViewModel = ViewModelProviders
+        val mCollectionViewModel = ViewModelProviders
             .of(this, CollectionViewModelFactory(activity!!.application, type))
             .get(CollectionViewModel::class.java)
-        mSubjectViewModel.subjects.observe(this, Observer<List<CollectionSubject>> { t ->
+        // binding.collectionViewModel = mCollectionViewModel
+        val adapter = col_list.adapter!! as CollectionSubjectAdapter
+        mCollectionViewModel.subjects.observe(this, Observer<List<CollectionSubject>> { t ->
             adapter.setCollectionSubjects(t)
         })
     }

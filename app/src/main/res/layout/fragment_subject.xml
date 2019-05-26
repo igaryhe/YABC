@@ -7,7 +7,6 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:transitionName="cover"
         android:src="@color/bgmSecondary"
         android:layout_width="400dp"
         android:layout_height="316dp"
