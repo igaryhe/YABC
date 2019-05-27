@@ -12,11 +12,16 @@ import io.igaryhe.yabc.adapters.CalendarPagerAdapter
 import kotlinx.android.synthetic.main.fragment_discover.*
 
 class DiscoverFragment : Fragment() {
-
+    private var v: View? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_discover, container, false)
+    ): View? {
+        if (v == null) {
+            v = inflater.inflate(R.layout.fragment_discover, container, false)
+        }
+        return v
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
