@@ -12,9 +12,3 @@ import io.igaryhe.yabc.models.CollectionSubject
 fun ImageView.setImageUrl(url: LiveData<String>) {
     Picasso.get().load(url.value).into(this)
 }
-
-@BindingAdapter("adapter")
-fun RecyclerView.setAdapter(list: LiveData<List<CollectionSubject>>) {
-    val adapter = this.adapter as CollectionSubjectAdapter
-    adapter.setCollectionSubjects(list.value!!)
-}

@@ -22,13 +22,6 @@ class CalendarFragment(private val day: Int) : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_calendar, container, false)
-
-        val mCalendarViewModel = ViewModelProviders.of(this).get(CalendarViewModel::class.java)
-        mCalendarViewModel.calendar[day].observe(this, Observer<List<SubjectSmall>> {
-            t ->
-            val adapter = cal_list.adapter!! as CalendarSubjectAdapter
-            adapter.setCalendarSubjects(t)
-        })
         if (view is RecyclerView) {
             with(view) {
                 layoutManager = LinearLayoutManager(context)
@@ -36,5 +29,14 @@ class CalendarFragment(private val day: Int) : Fragment() {
             }
         }
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val mCalendarViewModel = ViewModelProviders.of(this).get(CalendarViewModel::class.java)
+        val adapter = cal_list.adapter!! as CalendarSubjectAdapter
+        mCalendarViewModel.calendar[day].observe(this, Observer<List<SubjectSmall>> {
+            adapter.submitList(it)
+        })
     }
 }

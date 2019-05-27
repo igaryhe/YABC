@@ -29,7 +29,6 @@ class CollectionFragment(private val type: Int) : Fragment() {
                 adapter = CollectionSubjectAdapter()
             }
         }
-        // binding.lifecycleOwner = this
         return view
     }
 
@@ -40,7 +39,7 @@ class CollectionFragment(private val type: Int) : Fragment() {
             .get(CollectionViewModel::class.java)
         val adapter = col_list.adapter!! as CollectionSubjectAdapter
         mCollectionViewModel.subjects.observe(this, Observer<List<CollectionSubject>> {
-            adapter.setCollectionSubjects(it)
+            adapter.submitList(it)
         })
     }
 }

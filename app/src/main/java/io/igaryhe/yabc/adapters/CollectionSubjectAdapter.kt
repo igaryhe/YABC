@@ -5,28 +5,28 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import io.igaryhe.yabc.models.CollectionSubject
 import io.igaryhe.yabc.R
 import io.igaryhe.yabc.fragments.MainFragmentDirections
+import io.igaryhe.yabc.util.CollectionSubjectDiffCallback
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.subject_card.*
 
 class CollectionSubjectAdapter:
-    RecyclerView.Adapter<CollectionSubjectAdapter.CollectionSubjectViewHolder>() {
-
-    private var mSubjects = listOf<CollectionSubject>()
+    ListAdapter<CollectionSubject, CollectionSubjectAdapter.CollectionSubjectViewHolder>(CollectionSubjectDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
             CollectionSubjectViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.subject_card, parent, false)
         return CollectionSubjectViewHolder(v)
     }
-    override fun getItemCount() = mSubjects.size
     override fun onBindViewHolder(holder: CollectionSubjectViewHolder, position: Int) {
         holder.apply {
-            with (mSubjects[position].subject) {
+            with (getItem(position).subject) {
                 subjectName.text = name
                 val id = id
                 val image = images.large
@@ -41,12 +41,6 @@ class CollectionSubjectAdapter:
             }
         }
     }
-
-    fun setCollectionSubjects(subjects: List<CollectionSubject>) {
-        mSubjects = subjects
-        notifyDataSetChanged()
-    }
-
     inner class CollectionSubjectViewHolder(override val containerView: View)
         : RecyclerView.ViewHolder(containerView), LayoutContainer
 }

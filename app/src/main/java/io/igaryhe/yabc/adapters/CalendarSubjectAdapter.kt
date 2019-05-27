@@ -3,35 +3,30 @@ package io.igaryhe.yabc.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import io.igaryhe.yabc.R
 import io.igaryhe.yabc.models.SubjectSmall
+import io.igaryhe.yabc.util.SubjectSmallDiffCallback
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.subject_card.*
 
 class CalendarSubjectAdapter:
-    RecyclerView.Adapter<CalendarSubjectAdapter.CalendarSubjectViewHolder>() {
-    private var mSubjects = mutableListOf<SubjectSmall>()
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarSubjectViewHolder {
+    ListAdapter<SubjectSmall, CalendarSubjectAdapter.CalendarSubjectViewHolder>(SubjectSmallDiffCallback()){
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
+            CalendarSubjectViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.subject_card, parent, false)
         return CalendarSubjectViewHolder(v)
     }
 
-    override fun getItemCount(): Int = mSubjects.size
-
     override fun onBindViewHolder(holder: CalendarSubjectViewHolder, position: Int) {
         holder.apply {
-            subjectName.text = mSubjects[position].name
-            subjectId.text = mSubjects[position].id.toString()
-            if (mSubjects[position].images != null)
-                Picasso.get().load(mSubjects[position].images.medium).into(subjectCover)
+            subjectName.text = getItem(position).name
+            subjectId.text = getItem(position).id.toString()
+            if (getItem(position).images != null)
+                Picasso.get().load(getItem(position).images.medium).into(subjectCover)
         }
-    }
-
-    fun setCalendarSubjects(subjects: List<SubjectSmall>) {
-        mSubjects = subjects as MutableList<SubjectSmall>
-        notifyDataSetChanged()
     }
 
     inner class CalendarSubjectViewHolder(override val containerView: View)
