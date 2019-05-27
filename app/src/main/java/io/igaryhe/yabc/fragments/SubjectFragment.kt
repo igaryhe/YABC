@@ -39,7 +39,7 @@ class SubjectFragment : Fragment() {
         mSubjectViewModel = ViewModelProviders
             .of(this, SubjectViewModelFactory(args.id))
             .get(SubjectMediumViewModel::class.java)
-        binding.lifecycleOwner = this@SubjectFragment
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.subjectViewModel = mSubjectViewModel
         return binding.root
     }
