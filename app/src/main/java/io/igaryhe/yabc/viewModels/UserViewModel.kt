@@ -12,6 +12,7 @@ import io.igaryhe.yabc.repositories.UserRepository
 
 class UserViewModel(app: Application) : AndroidViewModel(app) {
     private val repo = UserRepository(app)
+    val user = repo.user
     val nickname: LiveData<String> = Transformations.map(repo.user) { user -> user.nickname }
     val username: LiveData<String> = Transformations.map(repo.user) { user -> user.username }
     val avatar: LiveData<String> = Transformations.map(repo.user) {user -> user.avatar.large}

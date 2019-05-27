@@ -2,10 +2,12 @@ package io.igaryhe.yabc.fragments
 
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
@@ -18,9 +20,12 @@ import io.igaryhe.yabc.viewModels.SubjectMediumViewModel
 import io.igaryhe.yabc.util.SubjectViewModelFactory
 import kotlinx.android.synthetic.main.fragment_subject.*
 import java.lang.Exception
+import io.igaryhe.yabc.databinding.FragmentSubjectBinding
 
 
 class SubjectFragment : Fragment() {
+    private lateinit var binding: FragmentSubjectBinding
+    private lateinit var mSubjectViewModel: SubjectMediumViewModel
     val args: SubjectFragmentArgs by navArgs()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +34,15 @@ class SubjectFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_subject, container, false)
+    ): View? {
+        binding = FragmentSubjectBinding.inflate(inflater, container, false)
+        mSubjectViewModel = ViewModelProviders
+            .of(this, SubjectViewModelFactory(args.id))
+            .get(SubjectMediumViewModel::class.java)
+        binding.lifecycleOwner = this@SubjectFragment
+        binding.subjectViewModel = mSubjectViewModel
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,11 +56,6 @@ class SubjectFragment : Fragment() {
             override fun onError(e: Exception?) {
                 startPostponedEnterTransition()
             }
-        })
-        val mSubjectMediumViewModel = ViewModelProviders
-            .of(this, SubjectViewModelFactory(id))
-            .get(SubjectMediumViewModel::class.java)
-        mSubjectMediumViewModel.subjectMedium.observe(this, Observer<SubjectMedium>{
         })
     }
 }
