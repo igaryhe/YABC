@@ -18,7 +18,6 @@ import io.igaryhe.yabc.viewModels.UserViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var appbarMenu: Menu
     private lateinit var appBarConfiguration: AppBarConfiguration
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,19 +42,4 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp()
             = findNavController(R.id.nav_host_fragment).navigateUp(appBarConfiguration)
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-
-        menuInflater.inflate(R.menu.options_menu, menu)
-        appbarMenu = menu
-        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        (menu.findItem(R.id.search).actionView as SearchView).apply {
-            setSearchableInfo(searchManager.getSearchableInfo(componentName))
-            setOnQueryTextListener(object: SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(query: String?): Boolean { return false }
-                override fun onQueryTextChange(newText: String?): Boolean { return true }
-            })
-        }
-        return true
-    }
 }

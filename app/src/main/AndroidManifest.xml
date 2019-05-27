@@ -17,8 +17,6 @@ package="io.igaryhe.yabc">
     <activity android:name=".activities.MainActivity"
         android:label="@string/title_activity_main"
         android:theme="@style/BgmLightTheme.NoActionBar">
-        <meta-data android:name="android.app.default_searchable"
-            android:value=".activities.SearchActivity" />
         <nav-graph android:value="@navigation/nav_graph" />
     </activity>
     <activity android:name=".activities.SplashActivity"
@@ -37,13 +35,6 @@ package="io.igaryhe.yabc">
                 android:host="callback"
                 android:scheme="yabc" />
         </intent-filter>
-    </activity>
-    <activity android:name=".activities.SearchActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.SEARCH" />
-        </intent-filter>
-        <meta-data android:name="android.app.searchable"
-            android:resource="@xml/searchable"/>
     </activity>
 </application>
 </manifest>
