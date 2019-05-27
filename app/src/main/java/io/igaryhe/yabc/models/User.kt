@@ -1,4 +1,4 @@
-package io.igaryhe.yabc.entities
+package io.igaryhe.yabc.models
 
 data class User(val username: String,
                 val nickname: String,

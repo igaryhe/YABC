@@ -6,7 +6,5 @@ import io.igaryhe.yabc.viewModels.SubjectMediumViewModel
 
 class SubjectViewModelFactory (private val id: Int):
     ViewModelProvider.NewInstanceFactory() {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return SubjectMediumViewModel(id) as T
-    }
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T = SubjectMediumViewModel(id) as T
 }

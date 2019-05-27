@@ -1,7 +1,6 @@
-package io.igaryhe.yabc.entities
+package io.igaryhe.yabc.models
 
 import com.google.gson.annotations.SerializedName
-import io.igaryhe.yabc.entities.SubjectSmall
 
 data class CollectionSubject (@SerializedName("ep_status") val epStatus: Int,
                               @SerializedName("subject_id") val subjectId: Int,

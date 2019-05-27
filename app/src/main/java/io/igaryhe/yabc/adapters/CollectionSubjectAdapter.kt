@@ -7,7 +7,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import io.igaryhe.yabc.entities.CollectionSubject
+import io.igaryhe.yabc.models.CollectionSubject
 import io.igaryhe.yabc.R
 import io.igaryhe.yabc.fragments.MainFragmentDirections
 import kotlinx.android.extensions.LayoutContainer

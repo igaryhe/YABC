@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import io.igaryhe.yabc.adapters.CollectionSubjectAdapter
-import io.igaryhe.yabc.entities.CollectionSubject
+import io.igaryhe.yabc.models.CollectionSubject
 
 @BindingAdapter("imageUrl")
 fun ImageView.setImageUrl(url: LiveData<String>) {

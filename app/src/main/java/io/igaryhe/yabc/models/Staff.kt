@@ -1,4 +1,4 @@
-package io.igaryhe.yabc.entities
+package io.igaryhe.yabc.models
 
 import com.google.gson.annotations.SerializedName
 
@@ -11,5 +11,5 @@ data class Staff(val id: Int,
                  val comment: Int,
                  val collects: Int,
                  val info: Info,
-                 val jobs: String
+                 val jobs: List<String>
 )

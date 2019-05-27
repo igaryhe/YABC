@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import io.igaryhe.yabc.entities.CollectionSubject
+import io.igaryhe.yabc.models.CollectionSubject
 import io.igaryhe.yabc.repositories.CollectionRepository
 
 class CollectionViewModel(app: Application, type: Int) : AndroidViewModel(app) {

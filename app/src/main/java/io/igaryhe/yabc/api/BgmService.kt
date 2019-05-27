@@ -1,7 +1,7 @@
 package io.igaryhe.yabc.api
 
 import androidx.lifecycle.LiveData
-import io.igaryhe.yabc.entities.*
+import io.igaryhe.yabc.models.*
 import io.igaryhe.yabc.util.LiveDataCallAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -38,10 +38,10 @@ interface BgmService {
     @GET("/calendar")
     fun getCalendar():LiveData<List<Calendar>>
 
-    @GET("/subject/{id}?responseGroup=Medium")
+    @GET("/subject/{id}?responseGroup=medium")
     fun getMediumSubject(
         @Path("id") id: Int
-    ):LiveData<SubjectMedium>
+    ): LiveData<SubjectMedium>
 
     @GET("/user/{user_id}")
     fun getUser(@Path("user_id") userId: Int): LiveData<User>

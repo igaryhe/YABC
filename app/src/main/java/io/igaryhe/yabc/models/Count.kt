@@ -1,4 +1,4 @@
-package io.igaryhe.yabc.entities
+package io.igaryhe.yabc.models
 import com.google.gson.annotations.SerializedName
 
 data class Count(@SerializedName("1")

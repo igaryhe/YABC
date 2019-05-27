@@ -1,4 +1,4 @@
-package io.igaryhe.yabc.entities
+package io.igaryhe.yabc.models
 
 data class Images(val common: String,
                   val grid: String,

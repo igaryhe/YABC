@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
-import io.igaryhe.yabc.entities.AccessToken
+import io.igaryhe.yabc.models.AccessToken
 import io.igaryhe.yabc.api.BgmService
 import io.igaryhe.yabc.R
 

@@ -7,7 +7,7 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import io.igaryhe.yabc.R
 import io.igaryhe.yabc.api.BgmService
-import io.igaryhe.yabc.entities.RefreshToken
+import io.igaryhe.yabc.models.RefreshToken
 
 class SplashActivity : AppCompatActivity() {
 

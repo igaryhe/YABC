@@ -3,8 +3,7 @@ package io.igaryhe.yabc.viewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import io.igaryhe.yabc.entities.Calendar
-import io.igaryhe.yabc.entities.SubjectSmall
+import io.igaryhe.yabc.models.SubjectSmall
 import io.igaryhe.yabc.repositories.CalendarRepository
 
 class CalendarViewModel : ViewModel() {

@@ -13,8 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import io.igaryhe.yabc.viewModels.CalendarViewModel
 import io.igaryhe.yabc.R
 import io.igaryhe.yabc.adapters.CalendarSubjectAdapter
-import io.igaryhe.yabc.entities.Calendar
-import io.igaryhe.yabc.entities.SubjectSmall
+import io.igaryhe.yabc.models.SubjectSmall
 import kotlinx.android.synthetic.main.fragment_calendar.*
 
 class CalendarFragment(private val day: Int) : Fragment() {
