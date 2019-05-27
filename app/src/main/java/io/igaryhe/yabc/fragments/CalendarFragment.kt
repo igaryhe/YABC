@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.igaryhe.yabc.viewModels.CalendarViewModel
 import io.igaryhe.yabc.R
-import io.igaryhe.yabc.adapters.CalendarSubjectAdapter
+import io.igaryhe.yabc.adapters.SubjectSmallAdapter
 import io.igaryhe.yabc.models.SubjectSmall
 import kotlinx.android.synthetic.main.fragment_calendar.*
 
@@ -25,7 +25,7 @@ class CalendarFragment(private val day: Int) : Fragment() {
         if (view is RecyclerView) {
             with(view) {
                 layoutManager = LinearLayoutManager(context)
-                adapter = CalendarSubjectAdapter()
+                adapter = SubjectSmallAdapter()
             }
         }
         return view
@@ -34,7 +34,7 @@ class CalendarFragment(private val day: Int) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val mCalendarViewModel = ViewModelProviders.of(this).get(CalendarViewModel::class.java)
-        val adapter = cal_list.adapter!! as CalendarSubjectAdapter
+        val adapter = cal_list.adapter!! as SubjectSmallAdapter
         mCalendarViewModel.calendar[day].observe(this, Observer<List<SubjectSmall>> {
             adapter.submitList(it)
         })

@@ -12,16 +12,16 @@ import io.igaryhe.yabc.util.SubjectSmallDiffCallback
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.subject_card.*
 
-class CalendarSubjectAdapter:
-    ListAdapter<SubjectSmall, CalendarSubjectAdapter.CalendarSubjectViewHolder>(SubjectSmallDiffCallback()){
+class SubjectSmallAdapter:
+    ListAdapter<SubjectSmall, SubjectSmallAdapter.SubjectSmallViewHolder>(SubjectSmallDiffCallback()){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
-            CalendarSubjectViewHolder {
+            SubjectSmallViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.subject_card, parent, false)
-        return CalendarSubjectViewHolder(v)
+        return SubjectSmallViewHolder(v)
     }
 
-    override fun onBindViewHolder(holder: CalendarSubjectViewHolder, position: Int) {
-        holder.apply {
+    override fun onBindViewHolder(holderSmall: SubjectSmallViewHolder, position: Int) {
+        holderSmall.apply {
             subjectName.text = getItem(position).name
             subjectId.text = getItem(position).id.toString()
             if (getItem(position).images != null)
@@ -29,6 +29,6 @@ class CalendarSubjectAdapter:
         }
     }
 
-    inner class CalendarSubjectViewHolder(override val containerView: View)
+    inner class SubjectSmallViewHolder(override val containerView: View)
         : RecyclerView.ViewHolder(containerView), LayoutContainer
 }

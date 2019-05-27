@@ -2,12 +2,21 @@ package io.igaryhe.yabc.fragments
 
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import io.igaryhe.yabc.R
+import io.igaryhe.yabc.adapters.SubjectSmallAdapter
+import io.igaryhe.yabc.models.SubjectSmall
+import io.igaryhe.yabc.util.SearchViewModelFactory
+import io.igaryhe.yabc.viewModels.SearchViewModel
 import kotlinx.android.synthetic.main.fragment_search.*
 
 class SearchFragment : Fragment() {
@@ -16,12 +25,24 @@ class SearchFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false)
+        val view = inflater.inflate(R.layout.fragment_search, container, false)
+        if (view is RecyclerView) {
+            with(view) {
+                layoutManager = LinearLayoutManager(context)
+                adapter = SubjectSmallAdapter()
+            }
+        }
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        text.text = args.query
+        val mSearchViewModel = ViewModelProviders
+            .of(this, SearchViewModelFactory(args.query.toString()))
+            .get(SearchViewModel::class.java)
+        val adapter = search_list.adapter as SubjectSmallAdapter
+        mSearchViewModel.subjects.observe(this, Observer<List<SubjectSmall>> {
+            adapter.submitList(it)
+        })
     }
 }

@@ -46,6 +46,9 @@ interface BgmService {
     @GET("/user/{user_id}")
     fun getUser(@Path("user_id") userId: Int): LiveData<User>
 
+    @GET("/search/subject/{name}")
+    fun searchSubject(@Path("name") name: String) : LiveData<SearchResult>
+
     companion object Factory {
         fun create(): BgmService {
             return Retrofit.Builder()
