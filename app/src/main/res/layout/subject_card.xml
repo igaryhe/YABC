@@ -1,55 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:clickable="true"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/collectionSubject"
+    <data>
+        <variable
+            name="subject"
+            type="io.igaryhe.yabc.models.SubjectSmall" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
         android:clickable="true"
-        android:foreground="?attr/selectableItemBackground"
-        app:cardCornerRadius="4dp">
+        android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.cardview.widget.CardView
+            android:id="@+id/collectionSubject"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardCornerRadius="4dp">
 
-            <ImageView
-                android:id="@+id/subjectCover"
-                android:layout_width="100dp"
-                android:layout_height="150dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:contentDescription="Subject Cover"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/subjectName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@+id/subjectCover"
-                app:layout_constraintTop_toTopOf="parent" />
+                <ImageView
+                    android:id="@+id/subjectCover"
+                    android:layout_width="100dp"
+                    android:layout_height="150dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:contentDescription="Subject Cover"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:imageUrl="@{subject.images.large}"
+                    android:transitionName="@{String.valueOf(subject.id)}"
+                    tools:srcCompat="@tools:sample/avatars" />
 
-            <TextView
-                android:id="@+id/subjectId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintStart_toEndOf="@+id/subjectCover"
-                app:layout_constraintTop_toBottomOf="@+id/subjectName" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+                <TextView
+                    android:id="@+id/subjectName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:textSize="18sp"
+                    android:text="@{subject.name}"
+                    app:layout_constraintStart_toEndOf="@+id/subjectCover"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-</LinearLayout>
+                <TextView
+                    android:id="@+id/subjectId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@{String.valueOf(subject.id)}"
+                    app:layout_constraintStart_toEndOf="@+id/subjectCover"
+                    app:layout_constraintTop_toBottomOf="@+id/subjectName" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+</layout>
