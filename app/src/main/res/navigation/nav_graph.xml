@@ -21,7 +21,11 @@
         android:id="@+id/discoverFragment"
         android:name="io.igaryhe.yabc.fragments.DiscoverFragment"
         android:label="Calendar"
-        tools:layout="@layout/fragment_discover"/>
+        tools:layout="@layout/fragment_discover">
+        <action
+            android:id="@+id/action_discover_to_subject"
+            app:destination="@id/subjectFragment" />
+    </fragment>
     <fragment
         android:id="@+id/subjectFragment"
         android:name="io.igaryhe.yabc.fragments.SubjectFragment"

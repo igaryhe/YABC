@@ -23,7 +23,6 @@ import kotlinx.android.synthetic.main.subject_card.view.*
 
 
 class CollectionFragment(private val type: Int) : Fragment() {
-    private var v: View? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
