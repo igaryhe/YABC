@@ -8,9 +8,9 @@
     </data>
     <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent" android:layout_marginRight="20dp">
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                      android:orientation="vertical">
+                      android:orientation="vertical" android:layout_marginLeft="10dp" android:layout_marginRight="10dp">
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -25,8 +25,8 @@
                         app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
                         app:layout_constraintBottom_toBottomOf="parent"/>
                 <TextView
-                        android:layout_width="271dp"
-                        android:layout_height="31dp" android:id="@+id/textName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" android:id="@+id/textName"
                         android:layout_marginTop="8dp"
                         app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginEnd="8dp" app:layout_constraintStart_toEndOf="@+id/imageView"
@@ -34,8 +34,8 @@
                         android:text="@{subjectViewModel.name}"/>
                 <TextView
                         android:text="@{subjectViewModel.nameCn}"
-                        android:layout_width="265dp"
-                        android:layout_height="68dp"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
                         android:id="@+id/textNameCn"
                         app:layout_constraintTop_toBottomOf="@+id/textName"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -46,8 +46,8 @@
                         app:layout_constraintBottom_toTopOf="@+id/textScore"/>
                 <TextView
                         android:text="@{subjectViewModel.score.toString()}"
-                        android:layout_width="228dp"
-                        android:layout_height="41dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
                         android:id="@+id/textScore" app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginEnd="8dp" app:layout_constraintStart_toEndOf="@+id/imageView"
                         android:layout_marginStart="8dp"
@@ -60,8 +60,8 @@
 
                 <TextView
                         android:text="Summary:"
-                        android:layout_width="410dp"
-                        android:layout_height="30dp" android:id="@+id/textSummary"
+                        android:layout_width="0dp"
+                        android:layout_height="32dp" android:id="@+id/textSummary"
                         app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
                         app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
                         android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
@@ -82,8 +82,8 @@
 
                 <TextView
                         android:text="Rating:"
-                        android:layout_width="415dp"
-                        android:layout_height="30dp" android:id="@+id/textRatingText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" android:id="@+id/textRatingText"
                         app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
                         app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
                         android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
@@ -92,8 +92,8 @@
 
                 <com.github.mikephil.charting.charts.BarChart
                         android:id="@+id/barchart"
-                        android:layout_width="397dp"
-                        android:layout_height="81dp"
+                        android:layout_width="0dp"
+                        android:layout_height="100dp"
                         android:layout_margin="12dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -101,7 +101,7 @@
                 />
                 <TextView
                         android:text="@{subjectViewModel.rating.toString() + subjectViewModel.rank}"
-                        android:layout_width="401dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/textRating" app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
@@ -113,8 +113,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                 <TextView
-                        android:text="Character Introduction"
-                        android:layout_width="408dp"
+                        android:text="Character"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content" android:id="@+id/textViewCrt"
                         app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
                         app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
@@ -126,6 +126,27 @@
                         tools:listitem="@layout/crt_card"
                         android:layout_marginTop="8dp"
                         app:layout_constraintTop_toBottomOf="@+id/textViewCrt"
+                        app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                        app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                <TextView
+                        android:text="Staff"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" android:id="@+id/textViewStaff"
+                        app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                        app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                        android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
+                        android:textSize="24sp"/>
+                <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" android:id="@+id/staff_list"
+                        tools:listitem="@layout/crt_card"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toBottomOf="@+id/textViewStaff"
                         app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
                         app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
                         android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"/>

@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import io.igaryhe.yabc.models.Count
 import io.igaryhe.yabc.models.Crt
 import io.igaryhe.yabc.models.Rating
+import io.igaryhe.yabc.models.Staff
 import io.igaryhe.yabc.repositories.SubjectRepository
 
 class SubjectMediumViewModel(private val _id: Int): ViewModel(){
@@ -21,4 +22,5 @@ class SubjectMediumViewModel(private val _id: Int): ViewModel(){
     val rating: LiveData<Rating> = Transformations.map(repo.subjectMedium) {subject -> subject.rating}
     val rank: LiveData<Int> = Transformations.map(repo.subjectMedium) {subject -> subject.rank}
     val crt: LiveData<List<Crt>> = Transformations.map(repo.subjectMedium) {subject -> subject.crt}
+    val staff: LiveData<List<Staff>> = Transformations.map(repo.subjectMedium) {subject -> subject.staff}
 }

@@ -26,6 +26,7 @@ import com.github.mikephil.charting.formatter.LargeValueFormatter
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import io.igaryhe.yabc.adapters.CrtCardAdapter
+import io.igaryhe.yabc.adapters.StaffCardAdapter
 import io.igaryhe.yabc.viewModels.SubjectMediumViewModel
 import io.igaryhe.yabc.util.SubjectViewModelFactory
 import kotlinx.android.synthetic.main.fragment_subject.*
@@ -53,6 +54,8 @@ class SubjectFragment : Fragment() {
             .get(SubjectMediumViewModel::class.java)
         binding.root.crt_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL ,false)
         binding.root.crt_list.adapter = CrtCardAdapter()
+        binding.root.staff_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL ,false)
+        binding.root.staff_list.adapter = StaffCardAdapter()
         binding.lifecycleOwner = viewLifecycleOwner
         binding.subjectViewModel = mSubjectViewModel
         return binding.root
@@ -72,9 +75,13 @@ class SubjectFragment : Fragment() {
             }
         })
         setScoreDistribution()
-        val adapter = crt_list.adapter as CrtCardAdapter
+        val adapter1 = crt_list.adapter as CrtCardAdapter
         mSubjectViewModel.crt.observe(this, Observer<List<Crt>> {
-            adapter.submitList(it)
+            adapter1.submitList(it)
+        })
+        val adapter2 = staff_list.adapter as StaffCardAdapter
+        mSubjectViewModel.staff.observe(this, Observer<List<Staff>> {
+            adapter2.submitList(it)
         })
     }
 
@@ -124,7 +131,6 @@ class SubjectFragment : Fragment() {
             barData.setValueFormatter(LargeValueFormatter())
             barChartView.data = barData
             barChartView.barData.barWidth = 0.8f
-            // barChartView.setVisibleXRange(0f, 10f)
             barChartView.setVisibleYRange(0f,1f, YAxis.AxisDependency.LEFT)
             barChartView.data.isHighlightEnabled = false
             barChartView.axisLeft.setDrawGridLines(false)
@@ -134,8 +140,6 @@ class SubjectFragment : Fragment() {
             barChartView.axisRight.isEnabled = false
             barChartView.axisLeft.axisMinimum = 0f
             barChartView.axisRight.axisMinimum = 0f
-            // barChartView.setVisibleXRangeMaximum(10f)
-            // barChartView.setVisibleXRangeMinimum(10f)
             barChartView.isDragEnabled = true
             barChartView.description = null
             barChartView.legend.isEnabled = false
