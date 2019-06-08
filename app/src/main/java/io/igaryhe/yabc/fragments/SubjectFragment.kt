@@ -112,38 +112,42 @@ class SubjectFragment : Fragment() {
         barChartView.setFitBars(true)
         mSubjectViewModel.rating.observe(this, Observer<Rating> {
             t ->
-            yValueGroup1.add(BarEntry(0.5f, t.count._1.toFloat()/t.total.toFloat()))
-            yValueGroup1.add(BarEntry(1.5f, t.count._2.toFloat()/t.total.toFloat()))
-            yValueGroup1.add(BarEntry(2.5f, t.count._3.toFloat()/t.total.toFloat()))
-            yValueGroup1.add(BarEntry(3.5f, t.count._4.toFloat()/t.total.toFloat()))
-            yValueGroup1.add(BarEntry(4.5f, t.count._5.toFloat()/t.total.toFloat()))
-            yValueGroup1.add(BarEntry(5.5f, t.count._6.toFloat()/t.total.toFloat()))
-            yValueGroup1.add(BarEntry(6.5f, t.count._7.toFloat()/t.total.toFloat()))
-            yValueGroup1.add(BarEntry(7.5f, t.count._8.toFloat()/t.total.toFloat()))
-            yValueGroup1.add(BarEntry(8.5f, t.count._9.toFloat()/t.total.toFloat()))
-            yValueGroup1.add(BarEntry(9.5f, t.count._10.toFloat()/t.total.toFloat()))
-            barDataSet1 = BarDataSet(yValueGroup1, "")
-            barDataSet1.setColors(Color.GRAY)
-            barDataSet1.setDrawIcons(false)
-            barDataSet1.setDrawValues(false)
+            try {
+                yValueGroup1.add(BarEntry(0.5f, t.count._1.toFloat() / t.total.toFloat()))
+                yValueGroup1.add(BarEntry(1.5f, t.count._2.toFloat() / t.total.toFloat()))
+                yValueGroup1.add(BarEntry(2.5f, t.count._3.toFloat() / t.total.toFloat()))
+                yValueGroup1.add(BarEntry(3.5f, t.count._4.toFloat() / t.total.toFloat()))
+                yValueGroup1.add(BarEntry(4.5f, t.count._5.toFloat() / t.total.toFloat()))
+                yValueGroup1.add(BarEntry(5.5f, t.count._6.toFloat() / t.total.toFloat()))
+                yValueGroup1.add(BarEntry(6.5f, t.count._7.toFloat() / t.total.toFloat()))
+                yValueGroup1.add(BarEntry(7.5f, t.count._8.toFloat() / t.total.toFloat()))
+                yValueGroup1.add(BarEntry(8.5f, t.count._9.toFloat() / t.total.toFloat()))
+                yValueGroup1.add(BarEntry(9.5f, t.count._10.toFloat() / t.total.toFloat()))
+                barDataSet1 = BarDataSet(yValueGroup1, "")
+                barDataSet1.setColors(Color.GRAY)
+                barDataSet1.setDrawIcons(false)
+                barDataSet1.setDrawValues(false)
 
-            var barData = BarData(barDataSet1)
-            barData.setValueFormatter(LargeValueFormatter())
-            barChartView.data = barData
-            barChartView.barData.barWidth = 0.8f
-            barChartView.setVisibleYRange(0f,1f, YAxis.AxisDependency.LEFT)
-            barChartView.data.isHighlightEnabled = false
-            barChartView.axisLeft.setDrawGridLines(false)
-            barChartView.axisRight.setDrawGridLines(false)
-            barChartView.xAxis.setDrawGridLines(false)
-            barChartView.axisLeft.isEnabled = false
-            barChartView.axisRight.isEnabled = false
-            barChartView.axisLeft.axisMinimum = 0f
-            barChartView.axisRight.axisMinimum = 0f
-            barChartView.isDragEnabled = true
-            barChartView.description = null
-            barChartView.legend.isEnabled = false
-            barChartView.invalidate()
+                var barData = BarData(barDataSet1)
+                barData.setValueFormatter(LargeValueFormatter())
+                barChartView.data = barData
+                barChartView.barData.barWidth = 0.8f
+                barChartView.setVisibleYRange(0f, 1f, YAxis.AxisDependency.LEFT)
+                barChartView.data.isHighlightEnabled = false
+                barChartView.axisLeft.setDrawGridLines(false)
+                barChartView.axisRight.setDrawGridLines(false)
+                barChartView.xAxis.setDrawGridLines(false)
+                barChartView.axisLeft.isEnabled = false
+                barChartView.axisRight.isEnabled = false
+                barChartView.axisLeft.axisMinimum = 0f
+                barChartView.axisRight.axisMinimum = 0f
+                barChartView.isDragEnabled = true
+                barChartView.description = null
+                barChartView.legend.isEnabled = false
+                barChartView.invalidate()
+            } catch (e: NullPointerException){
+
+            }
         })
 
         val xAxis = barChartView.xAxis
