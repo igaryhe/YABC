@@ -22,4 +22,3 @@ data class Count(@SerializedName("1")
                  @SerializedName("10")
                  var _10: Int
                  )
-

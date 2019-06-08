@@ -18,7 +18,20 @@ class SubjectMediumViewModel(_id: Int): ViewModel(){
     val nameCn: LiveData<String> = Transformations.map(repo.subjectMedium) {subject -> subject.nameCn}
     val summary: LiveData<String> = Transformations.map(repo.subjectMedium) {subject -> subject.summary}
     val score: LiveData<Float> = Transformations.map(repo.subjectMedium) {subject -> subject?.rating?.score ?: 0.0f}
-    val count: LiveData<Count> = Transformations.map(repo.subjectMedium) {subject -> subject.rating?.count}
+    val count: LiveData<List<Int?>> = Transformations.map(repo.subjectMedium) {subject ->
+        val list = mutableListOf<Int?>()
+        list.add(subject.rating?.count?._1)
+        list.add(subject.rating?.count?._2)
+        list.add(subject.rating?.count?._3)
+        list.add(subject.rating?.count?._4)
+        list.add(subject.rating?.count?._5)
+        list.add(subject.rating?.count?._6)
+        list.add(subject.rating?.count?._7)
+        list.add(subject.rating?.count?._8)
+        list.add(subject.rating?.count?._9)
+        list.add(subject.rating?.count?._10)
+        list
+    }
     val rating: LiveData<Rating> = Transformations.map(repo.subjectMedium) {subject -> subject.rating}
     val rank: LiveData<Int> = Transformations.map(repo.subjectMedium) {subject -> subject.rank}
     val crt: LiveData<List<Crt>> = Transformations.map(repo.subjectMedium) {subject -> subject.crt}

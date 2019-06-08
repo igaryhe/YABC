@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +20,7 @@ import io.igaryhe.yabc.models.SubjectSmall
 import io.igaryhe.yabc.util.SearchViewModelFactory
 import io.igaryhe.yabc.viewModels.SearchViewModel
 import kotlinx.android.synthetic.main.fragment_search.*
+import kotlinx.android.synthetic.main.subject_card.view.*
 
 class SearchFragment : Fragment() {
     val args: SearchFragmentArgs by navArgs()
@@ -43,6 +46,14 @@ class SearchFragment : Fragment() {
         val adapter = search_list.adapter as SubjectSmallAdapter
         mSearchViewModel.subjects.observe(this, Observer<List<SubjectSmall>> {
             adapter.submitList(it)
+            adapter.onItemClickListener = View.OnClickListener { v ->
+                val viewHolder = v.tag as RecyclerView.ViewHolder
+                val position = viewHolder.adapterPosition
+                val id = it[position].id
+                val action = SearchFragmentDirections.actionSearchToSubject(id, it[position].images?.large)
+                val extra = FragmentNavigatorExtras(viewHolder.itemView.subjectCover to "$id")
+                view.findNavController().navigate(action, extra)
+            }
         })
     }
 }

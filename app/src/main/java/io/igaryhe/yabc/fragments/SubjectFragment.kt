@@ -7,15 +7,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.TransitionInflater
-import com.github.mikephil.charting.charts.BarChart
-import com.github.mikephil.charting.components.Legend
-import com.github.mikephil.charting.components.LegendEntry
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.BarData
@@ -92,8 +88,6 @@ class SubjectFragment : Fragment() {
 
     private fun setScoreDistribution() {
 
-        val barChartView = barchart
-
         val xAxisValues = ArrayList<String>()
         xAxisValues.add("1")
         xAxisValues.add("2")
@@ -106,67 +100,68 @@ class SubjectFragment : Fragment() {
         xAxisValues.add("9")
         xAxisValues.add("10")
 
+        barchart.xAxis.apply {
+            granularity = 1f
+            isGranularityEnabled = true
+            setCenterAxisLabels(false)
+            textSize = 9f
+            position = XAxis.XAxisPosition.BOTTOM
+            valueFormatter = IndexAxisValueFormatter(xAxisValues)
+            labelCount = 10
+            mAxisMaximum = 10f
+            setCenterAxisLabels(true)
+            setAvoidFirstLastClipping(true)
+            spaceMin = 4f
+            spaceMax = 4f
+            axisMinimum = 0f
+            axisMaximum = 9f
+            setDrawGridLines(false)
+        }
+        barchart.apply {
+            axisLeft.setDrawGridLines(false)
+            axisRight.setDrawGridLines(false)
+            axisLeft.isEnabled = false
+            axisRight.isEnabled = false
+            axisLeft.axisMinimum = 0f
+            axisRight.axisMinimum = 0f
+            legend.isEnabled = false
+            isDragEnabled = true
+            description = null
+            setFitBars(true)
+        }
 
-        val yValueGroup1 = ArrayList<BarEntry>()
+        val yValues = ArrayList<BarEntry>()
 
         // draw the graph
-        var barDataSet1: BarDataSet
-
-        barChartView.xAxis.axisMinimum = 0f
-        barChartView.xAxis.axisMaximum = 9f
-        barChartView.setFitBars(true)
-        barChartView.setVisibleYRange(0f,1f, YAxis.AxisDependency.LEFT)
-        barChartView.axisLeft.setDrawGridLines(false)
-        barChartView.axisRight.setDrawGridLines(false)
-        barChartView.xAxis.setDrawGridLines(false)
-        barChartView.axisLeft.isEnabled = false
-        barChartView.axisRight.isEnabled = false
-        barChartView.axisLeft.axisMinimum = 0f
-        barChartView.axisRight.axisMinimum = 0f
-        barChartView.isDragEnabled = true
-        barChartView.description = null
-        barChartView.legend.isEnabled = false
+        var barDataSet: BarDataSet
         mSubjectViewModel.rating.observe(this, Observer<Rating> {
             t ->
             if (t != null) {
-                yValueGroup1.add(BarEntry(0.5f, t.count._1.toFloat() / t.total.toFloat()))
-                yValueGroup1.add(BarEntry(1.5f, t.count._2.toFloat() / t.total.toFloat()))
-                yValueGroup1.add(BarEntry(2.5f, t.count._3.toFloat() / t.total.toFloat()))
-                yValueGroup1.add(BarEntry(3.5f, t.count._4.toFloat() / t.total.toFloat()))
-                yValueGroup1.add(BarEntry(4.5f, t.count._5.toFloat() / t.total.toFloat()))
-                yValueGroup1.add(BarEntry(5.5f, t.count._6.toFloat() / t.total.toFloat()))
-                yValueGroup1.add(BarEntry(6.5f, t.count._7.toFloat() / t.total.toFloat()))
-                yValueGroup1.add(BarEntry(7.5f, t.count._8.toFloat() / t.total.toFloat()))
-                yValueGroup1.add(BarEntry(8.5f, t.count._9.toFloat() / t.total.toFloat()))
-                yValueGroup1.add(BarEntry(9.5f, t.count._10.toFloat() / t.total.toFloat()))
-                barDataSet1 = BarDataSet(yValueGroup1, "")
-                barDataSet1.setColors(Color.GRAY)
-                barDataSet1.setDrawIcons(false)
-                barDataSet1.setDrawValues(false)
-                val barData = BarData(barDataSet1)
+                yValues.add(BarEntry(0.5f, t.count._1.toFloat() / t.total.toFloat()))
+                yValues.add(BarEntry(1.5f, t.count._2.toFloat() / t.total.toFloat()))
+                yValues.add(BarEntry(2.5f, t.count._3.toFloat() / t.total.toFloat()))
+                yValues.add(BarEntry(3.5f, t.count._4.toFloat() / t.total.toFloat()))
+                yValues.add(BarEntry(4.5f, t.count._5.toFloat() / t.total.toFloat()))
+                yValues.add(BarEntry(5.5f, t.count._6.toFloat() / t.total.toFloat()))
+                yValues.add(BarEntry(6.5f, t.count._7.toFloat() / t.total.toFloat()))
+                yValues.add(BarEntry(7.5f, t.count._8.toFloat() / t.total.toFloat()))
+                yValues.add(BarEntry(8.5f, t.count._9.toFloat() / t.total.toFloat()))
+                yValues.add(BarEntry(9.5f, t.count._10.toFloat() / t.total.toFloat()))
+                barDataSet = BarDataSet(yValues, "")
+                barDataSet.setColors(Color.GRAY)
+                barDataSet.setDrawIcons(false)
+                barDataSet.setDrawValues(false)
+                val barData = BarData(barDataSet)
                 barData.setValueFormatter(LargeValueFormatter())
-                barChartView.data = barData
-                barChartView.barData.barWidth = 0.8f
-                barChartView.data.isHighlightEnabled = false
-                barChartView.invalidate()
+                barData.barWidth = 0.8f
+                barchart.apply {
+                    data = barData
+                    data.isHighlightEnabled = false
+                    setVisibleYRange(0f, 1f, YAxis.AxisDependency.LEFT)
+                    invalidate()
+                }
             }
         })
 
-        val xAxis = barChartView.xAxis
-        xAxis.granularity = 1f
-        xAxis.isGranularityEnabled = true
-        xAxis.setCenterAxisLabels(false)
-        xAxis.textSize = 9f
-        xAxis.position = XAxis.XAxisPosition.BOTTOM
-        xAxis.valueFormatter = IndexAxisValueFormatter(xAxisValues)
-        xAxis.labelCount = 10
-        xAxis.mAxisMaximum = 10f
-        xAxis.setCenterAxisLabels(true)
-        xAxis.setAvoidFirstLastClipping(true)
-        xAxis.spaceMin = 4f
-        xAxis.spaceMax = 4f
-
     }
-
-
 }

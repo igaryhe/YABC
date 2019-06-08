@@ -8,7 +8,7 @@
     </data>
     <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:layout_marginRight="20dp">
+            android:layout_height="match_parent" android:layout_marginEnd="20dp">
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                       android:orientation="vertical" android:layout_marginLeft="10dp" android:layout_marginRight="10dp">
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,22 +32,26 @@
                         android:layout_marginEnd="8dp" app:layout_constraintStart_toEndOf="@+id/imageView"
                         android:layout_marginStart="8dp"
                         android:text="@{subjectViewModel.name}"/>
+
                 <TextView
-                        android:text="@{subjectViewModel.nameCn}"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:id="@+id/textNameCn"
-                        app:layout_constraintTop_toBottomOf="@+id/textName"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginEnd="8dp" app:layout_constraintStart_toEndOf="@+id/imageView"
-                        android:layout_marginStart="8dp"
-                        app:layout_constraintHorizontal_bias="0.571"
-                        android:textSize="24sp" android:layout_marginBottom="8dp"
-                        app:layout_constraintBottom_toTopOf="@+id/textScore"/>
+                    android:id="@+id/textNameCn"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@{subjectViewModel.nameCn}"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toTopOf="@+id/textScore"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.571"
+                    app:layout_constraintStart_toEndOf="@+id/imageView"
+                    app:layout_constraintTop_toBottomOf="@+id/textName" />
+
                 <TextView
                         android:text="@{subjectViewModel.score.toString()}"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:id="@+id/textScore" app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginEnd="8dp" app:layout_constraintStart_toEndOf="@+id/imageView"
                         android:layout_marginStart="8dp"
