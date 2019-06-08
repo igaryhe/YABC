@@ -44,7 +44,7 @@ class CalendarFragment(private val day: Int) : Fragment() {
                 val viewHolder = v.tag as RecyclerView.ViewHolder
                 val position = viewHolder.adapterPosition
                 val id = it[position].id
-                val action = DiscoverFragmentDirections.actionDiscoverToSubject(id, it[position].images.large)
+                val action = DiscoverFragmentDirections.actionDiscoverToSubject(id, it[position].images?.large)
                 val extra = FragmentNavigatorExtras(viewHolder.itemView.subjectCover to "$id")
                 view.findNavController().navigate(action, extra)
             }

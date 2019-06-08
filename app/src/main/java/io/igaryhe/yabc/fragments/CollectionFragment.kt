@@ -49,7 +49,7 @@ class CollectionFragment(private val type: Int) : Fragment() {
                 val viewHolder = v.tag as RecyclerView.ViewHolder
                 val position = viewHolder.adapterPosition
                 val id = it[position].subject.id
-                val action = MainFragmentDirections.actionMainToSubject(id, it[position].subject.images.large)
+                val action = MainFragmentDirections.actionMainToSubject(id, it[position].subject.images?.large)
                 val extra = FragmentNavigatorExtras(viewHolder.itemView.subjectCover to "$id")
                 view.findNavController().navigate(action, extra)
             }
