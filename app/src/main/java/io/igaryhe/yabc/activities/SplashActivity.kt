@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.content.edit
 import androidx.lifecycle.Observer
 import io.igaryhe.yabc.R
 import io.igaryhe.yabc.api.BgmService
@@ -34,10 +35,9 @@ class SplashActivity : AppCompatActivity() {
         finish()
     }
     private fun saveRefreshToken(result: RefreshToken) {
-        val sp = getSharedPreferences("token", Context.MODE_PRIVATE)
-        val editor = sp.edit()
-        editor.putString("access_token", result.accessToken)
-        editor.putString("refresh_token", result.refreshToken)
-        editor.apply()
+        getSharedPreferences("token", Context.MODE_PRIVATE).edit {
+            putString("access_token", result.accessToken)
+            putString("refresh_token", result.refreshToken)
+        }
     }
 }

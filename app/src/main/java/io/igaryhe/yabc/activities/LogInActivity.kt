@@ -6,6 +6,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.edit
 import androidx.lifecycle.Observer
 import io.igaryhe.yabc.models.AccessToken
 import io.igaryhe.yabc.api.BgmService
@@ -40,12 +41,11 @@ class LogInActivity : AppCompatActivity() {
     }
 
     private fun saveAccessToken(result: AccessToken) {
-        val sp = getSharedPreferences("token", Context.MODE_PRIVATE)
-        val editor = sp.edit()
-        editor.putString("access_token", result.accessToken)
-        editor.putString("refresh_token", result.refreshToken)
-        editor.putInt("user_id", result.userId)
-        editor.apply()
+        getSharedPreferences("token", Context.MODE_PRIVATE).edit {
+            putString("access_token", result.accessToken)
+            putString("refresh_token", result.refreshToken)
+            putInt("user_id", result.userId)
+        }
     }
 
     fun onClick(v: View) {
